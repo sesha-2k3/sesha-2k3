@@ -101,5 +101,5 @@
 <p align="center">
 	<a href="mailto:seshadrivv28@gmail.com"><img src="https://img.icons8.com/bubbles/50/000000/gmail.png" alt="Gmail"/></a>
 	<a href="https://github.com/sesha-2k3"><img src="https://img.icons8.com/bubbles/50/000000/github.png" alt="GitHub"/></a>
-	<a href="https://instagram.com/sesha.28"><img src="https://img.icons8.com/bubbles/50/000000/instagram.png" alt="Instagram"/></a>
+	<a href="https://instagram.com/sesha.28"><img src="https://img.icons8.com/bubbles/50/000000/instagram.png" alt="Instagram"/></a> 
 </p>
