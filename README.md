@@ -38,7 +38,7 @@
     <img alt="Streamlit" src="https://img.shields.io/badge/Streamlit-FF4B4B.svg?logo=Streamlit&logoColor=white">
 </p>
 
-### 🗄️ Databases and Cloud hosting
+### 🗄️ Databases and Cloud hosting 
 
 <p>
     <img alt="PostgreSQL" src ="https://img.shields.io/badge/MySQL-005C84?logo=mysql&logoColor=white">
