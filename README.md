@@ -20,7 +20,7 @@
     <img alt="Python" src="https://img.shields.io/badge/Python-1867C0.svg?logo=python&logoColor=white">
 </p>
 
-### 👉 Frontend Development
+### 👉 Frontend Development 
 
 <p align="left">
    <img alt="HTML" src="https://img.shields.io/badge/HTML5%20-%23E34F26.svg?logo=html5&logoColor=white">
