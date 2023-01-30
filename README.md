@@ -52,7 +52,7 @@
     <img alt="Windows" src="https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=white">
 </p>
 
-### 🧑🏻‍💻 Software and Tools
+### 🧑🏻‍💻 Software and Tools 
 
 <p>
     <img alt="Colab" src="https://img.shields.io/badge/Colab-F9AB00.svg?logo=googlecolab&color=525252">
