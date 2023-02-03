@@ -6,7 +6,7 @@
 <br>
 <p align="center"> <img src="https://komarev.com/ghpvc/?username=sesha-2k3&label=Sesha's%20Profile%20Views%20&color=blue&style=plastic" alt="sesha-2k3" /> </p>
 
-## 🔥 Streak Stats
+## 🔥 Streak Stats 
 
 <p align="center"><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=sesha-2k3&theme=algolia" alt="sesha-2k3" /></p>
 
