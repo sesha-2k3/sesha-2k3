@@ -12,7 +12,7 @@
 
 <h2 align="left">🚀 Languages and Tools :</h2>
 
-### 👨‍💻 Programming languages
+### 👨‍💻 Programming languages 
 
 <p>
     <img alt="C" src="https://custom-icon-badges.herokuapp.com/badge/C-00599C.svg?logo=c-in-hexagon&logoColor=white">
