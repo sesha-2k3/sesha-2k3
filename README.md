@@ -96,7 +96,7 @@
 
 <br/>
 
-## 🙋‍♀️ Let's Connect
+## 🙋‍♀️ Connect with me:
 
 <p align="center">
 	<a href="mailto:seshadrivv28@gmail.com"><img src="https://img.icons8.com/bubbles/50/000000/gmail.png" alt="Gmail"/></a>
