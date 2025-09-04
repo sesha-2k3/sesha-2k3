@@ -2,7 +2,7 @@
 <p align="center">  
  <a href="https://github.com/DenverCoder1/readme-typing-svg"><img src="https://readme-typing-svg.herokuapp.com?lines=Computer+Science+Student;DS%20|%20AI%20|%20ML%20Enthusiast;Always%20learning%20new%20things&center=true&width=500&height=50&font=georgia"></a>
 </p>
-<h4 align="center">I'm a motivated student pursuing Bachelor of Engineering in Computer Science. I love to Code, Design, Innovate and Experiment. I am an enthusiastic and a social person who loves to take up new challenges and learn new skills. I love meeting new people, exchanging ideas and spreading knowledge and positivity. I have recently got my Tensorflow Developer Certificate and I'm looking forward to contribute into the field of Data Science and Machine Learning.</h4>
+<h4 align="center">I love to Code, Design, Innovate and Experiment. I am an enthusiastic and a social person who loves to take up new challenges and learn new skills. I love meeting new people, exchanging ideas and spreading knowledge and positivity. Looking forward to contribute into the field of Software Engineering and Machine Learning.</h4>
 <br>
 <p align="center"> <img src="https://komarev.com/ghpvc/?username=sesha-2k3&label=Sesha's%20Profile%20Views%20&color=blue&style=plastic" alt="sesha-2k3" /> </p>
 
