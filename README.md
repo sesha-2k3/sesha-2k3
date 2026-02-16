@@ -1,4 +1,4 @@
-<h1 align="center">Hi 👋, I'm Sesha<img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="35"></h1>  
+<h1 align="center">Hi, I'm Sesha<img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="35"></h1>  
 <p align="center">  
  <a href="https://github.com/DenverCoder1/readme-typing-svg"><img src="https://readme-typing-svg.herokuapp.com?lines=Computer+Science+Student;DS%20|%20AI%20|%20ML%20Enthusiast;Always%20learning%20new%20things&center=true&width=500&height=50&font=georgia"></a>
 </p> 
@@ -6,13 +6,13 @@
 <br>
 <p align="center"> <img src="https://komarev.com/ghpvc/?username=sesha-2k3&label=Sesha's%20Profile%20Views%20&color=blue&style=plastic" alt="sesha-2k3" /> </p>
 
-## 🔥 Streak Stats               
+## Streak Stats               
 
 <p align="center"><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=sesha-2k3&theme=algolia" alt="sesha-2k3" /></p>
 
-<h2 align="left">🚀 Languages and Tools :</h2>
+<h2 align="left"> Languages and Tools :</h2>
 
-### 👨‍💻 Programming languages 
+### Programming languages 
 
 <p>
     <img alt="C" src="https://custom-icon-badges.herokuapp.com/badge/C-00599C.svg?logo=c-in-hexagon&logoColor=white">
@@ -20,7 +20,7 @@
     <img alt="Python" src="https://img.shields.io/badge/Python-1867C0.svg?logo=python&logoColor=white">
 </p>
 
-### 👉 Frontend Development    
+### Frontend Development    
    
 <p align="left">
    <img alt="HTML" src="https://img.shields.io/badge/HTML5%20-%23E34F26.svg?logo=html5&logoColor=white">
@@ -28,7 +28,7 @@
    <img alt="Bootstrap" src="https://img.shields.io/badge/Bootstrap-%23563D7C.svg?style=flat&logo=bootstrap&logoColor=white"/>
 </p>
 
-### 🧩 Frameworks and libraries  
+### Frameworks and libraries  
 
 <p>
     <img alt="NumPy" src="https://img.shields.io/badge/Numpy-777BB4.svg?logo=numpy&logoColor=white">
@@ -38,7 +38,7 @@
     <img alt="Streamlit" src="https://img.shields.io/badge/Streamlit-FF4B4B.svg?logo=Streamlit&logoColor=white">
 </p>
 
-### 🗄️ Databases and Cloud hosting 
+### Databases and Cloud hosting 
 
 <p>
     <img alt="PostgreSQL" src ="https://img.shields.io/badge/MySQL-005C84?logo=mysql&logoColor=white">
@@ -46,13 +46,13 @@
     <img alt="MongoDB" src ="https://img.shields.io/badge/MongoDB-4EA94B.svg?logo=mongodb&logoColor=white">
 </p>
 
-### 💻 Workspace 
+### Workspace 
 
 <p>
     <img alt="Windows" src="https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=white">
 </p>
 
-### 🧑🏻‍💻 Software and Tools 
+### Software and Tools 
 
 <p>
     <img alt="Colab" src="https://img.shields.io/badge/Colab-F9AB00.svg?logo=googlecolab&color=525252">
@@ -70,10 +70,10 @@
 
 <br/>
 
-## 📊 Github Stats (Expand to View)
+## Github Stats (Expand to View)
 
 <details>
-  <summary><b>💻 GitHub Profile Stats</b></summary>
+  <summary><b>GitHub Profile Stats</b></summary>
   <br/>
   <p align="center">
     <img align="center" src="https://github-readme-stats.vercel.app/api?username=sesha-2k3&show_icons=true&locale=en&theme=algolia" alt="sesha-2k3" height="192px"/>
@@ -87,7 +87,7 @@
 </details>
 
 <details>
-  <summary><b>⚡ Recent GitHub Activity</b></summary>
+  <summary><b>Recent GitHub Activity</b></summary>
   <br/>
    <img alt="Sesha's Activity Graph" src="https://github-readme-activity-graph.cyclic.app/graph?username=sesha-2k3&custom_title=Sesha's%20Contribution%20Graph&theme=react-dark" />
   <br/>
@@ -96,7 +96,7 @@
 
 <br/>
 
-## 🙋‍♀️ Connect with me:
+## Connect with me:
 
 <p align="center">
 	<a href="mailto:seshadrivv28@gmail.com"><img src="https://img.icons8.com/bubbles/50/000000/gmail.png" alt="Gmail"/></a>
