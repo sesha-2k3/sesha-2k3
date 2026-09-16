@@ -332,7 +332,18 @@ def stars_counter(data):
     Count total stars in repositories owned by me
     """
     total_stars = 0
-    for node in data: total_stars += node['node']['stargazers']['totalCount']
+    skipped = 0
+    for node in data:
+        if node is None or node.get('node') is None:
+            skipped += 1
+            continue
+        stargazers = node['node'].get('stargazers')
+        if stargazers is None:
+            skipped += 1
+            continue
+        total_stars += stargazers.get('totalCount', 0)
+    if skipped:
+        print(f'  stars_counter: skipped {skipped} unresolvable repo node(s)')
     return total_stars
 
 
