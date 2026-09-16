@@ -1,40 +1,40 @@
-name: README build
+name: Update profile SVGs
+
 on:
-  push:
-    branches:
-      - main
   schedule:
-    - cron: "0 4 * * *"
+    - cron: "0 0 * * *"   # daily at 00:00 UTC
+  workflow_dispatch:       # lets you run it by hand from the Actions tab
+  push:
+    branches: [main]
+
+permissions:
+  contents: write          # required for the commit-back step
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          fetch-depth: 1
-      - name: Get Python 3.8
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
-      - name: Configure pip cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/cache/requirements.txt') }}
-          restore-keys: ${{ runner.os }}-pip-
+          python-version: "3.12"
+
       - name: Install dependencies
-        run: python -m pip install -r cache/requirements.txt
-      - name: Update README file
+        run: pip install requests python-dateutil lxml
+
+      - name: Generate SVGs
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           USER_NAME: ${{ secrets.USER_NAME }}
-        run: python today.py
-      - name: Commit
-        run: |-
-          git add .
-          git diff
-          git config --global user.email "github-actions-bot@andrew6rant.github.io"
-          git config --global user.name "Andrew6rant/GitHub-Actions-Bot"
-          git commit -m "Updated README" -a || echo "No changes to commit"
+        run: python3 today.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "chore: refresh profile stats"
           git push
