@@ -7,7 +7,7 @@ Dot padding is computed here so the static rows line up with the rows that
 today.py rewrites at runtime.
 """
 
-# layout consts
+# ---------------------------------------------------------------- layout consts
 CW = 8.1            # monospace advance width at font-size 13.5
 LH = 19.0           # line height
 TX = 286.0          # x origin of the text block
@@ -47,7 +47,49 @@ THEMES = {
     },
 }
 
-# content
+# ---------------------------------------------------------------- portrait
+# Baked by photo_to_ascii.py. 52 columns wide, sparse->dense ramp " .:-=+*#%@".
+# Dense glyphs sit where the photo is DARK, so on the dark panel this reads as
+# a lit silhouette and on the light panel as an ink drawing. Same grid for both.
+ART_ROWS = [
+    '                     =++++-',
+    '                 =+#%@@@%%%#*=',
+    '               *%@@@%%%%%###%%#+-',
+    '             +%@%%%%%%###***++##+',
+    '            *%%%%%@@%%####**++=##=',
+    '           -%%%@@@@@%%#####*******',
+    '            %%@@@@@@%#########**+',
+    '           +%%%%%%%%####***###++=--',
+    '          +#%@%%##%%###########*+ =',
+    '          +*%%@@%%%%%####%###+*%+ -',
+    '          =*#%@@@%#%%%%%#####*+*',
+    '          =*#%%@@@##%%%%%%%#####',
+    '        --=*#%%@##%###%%%%%%#%#-   -',
+    '        - -+%%%%+=+*######## =#=   +',
+    '      ===+#%%%%#==---=***+=  *%%%+=+=',
+    '     -===*#%%%%%=---- ---    #%#%#++*+---==',
+    '     -=-=**%%%%%=    = -     +%%%%%*+*-==',
+    '    --==++*%%*++=    -=      +%%%%%%#*+-++-',
+    '    -====+*#*+=---    -      =#%%%%##**+=*=-',
+    '   -====++++*+--        -      =****===++=+-',
+    ' ---===++++**=-       -          =*+ -=-=-==-',
+    '==-====++++**=                   -+*------ -=-',
+    '==-====++++**+-         =        -=*+-= -    =',
+    '++=====+++***+-                  -=+*----    -- -',
+    '+*=====+++***+=                  --+*+ -      =+-',
+    '+*==+==+++***+=                  --=+*=        +=',
+    '**======++*+**=                  --=+**=        =',
+    '**======+++***+-                --=+**##+       --',
+    '**+=====+++**++=                -==**##%@*-     -+=-',
+    '+*+=====++***++==-               -==+*##%%+      +*+',
+]
+
+ART_FS = 8.2        # font size; 52 cols * 0.6em = 256px, fits the art column
+ART_LH = 9.84       # line height: 2x the character advance, matching CELL=0.5
+ART_X = 22.0
+ART_TOP = 126.0
+
+# ---------------------------------------------------------------- content
 PROMPT = 'sesha-2k3@github:~$ ./neofetch --profile'
 
 # (label, value, dynamic_id or None)
@@ -108,16 +150,12 @@ def typing_values(n_chars, px_total):
 def build(theme_name):
     c = THEMES[theme_name]
     out = []
-    W, H = 880, 486
+    W = 880
+    # H is computed at the end from wherever the content actually finishes,
+    # so adding rows can never clip the bottom of the panel.
+    out.append('@@OPEN@@')
 
-    out.append(
-        '<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" '
-        'viewBox="0 0 {w} {h}" font-family="\'JetBrains Mono\',\'Cascadia Code\','
-        '\'Fira Code\',\'DejaVu Sans Mono\',Consolas,\'Courier New\',monospace" '
-        'font-size="13.5">'.format(w=W, h=H)
-    )
-
-    # typewriter clip
+    # ---- typewriter clip
     prompt_px = len(PROMPT) * CW
     out.append('<defs><clipPath id="typeclip"><rect x="24" y="50" width="0" height="24">')
     out.append('<animate attributeName="width" values="{}" dur="2.4s" '
@@ -125,18 +163,17 @@ def build(theme_name):
                    typing_values(len(PROMPT), prompt_px + 4)))
     out.append('</rect></clipPath></defs>')
 
-    # panel
-    out.append('<rect x="0.5" y="0.5" width="{}" height="{}" rx="10" fill="{}" '
-               'stroke="{}"/>'.format(W - 1, H - 1, c['panel'], c['border']))
+    # ---- panel
+    out.append('@@PANEL@@')
 
-    # window dots
+    # ---- window dots
     for i, col in enumerate([c['pink'], c['orange'], c['accent']]):
         out.append('<circle cx="{}" cy="24" r="4.5" fill="{}" opacity="0.85"/>'
                    .format(28 + i * 16, col))
     out.append('<line x1="0" y1="42" x2="{}" y2="42" stroke="{}"/>'
                .format(W, c['border']))
 
-    # typed prompt line
+    # ---- typed prompt line
     out.append('<g clip-path="url(#typeclip)">')
     out.append('<text x="24" y="66" fill="{}">{}</text>'.format(c['accent'], esc(PROMPT)))
     out.append('</g>')
@@ -150,31 +187,15 @@ def build(theme_name):
                'begin="2.4s" repeatCount="indefinite"/>')
     out.append('</rect>')
 
-    # left graphic: a small feed-forward network
-    gx, gy = 60.0, 150.0
-    layers = [(0, 4), (78, 5), (156, 3), (214, 1)]
-    coords = []
-    for dx, count in layers:
-        span = (count - 1) * 34
-        col = [(gx + dx, gy + i * 34 - span / 2 + 60) for i in range(count)]
-        coords.append(col)
-    for a, b in zip(coords, coords[1:]):
-        for p in a:
-            for q in b:
-                out.append('<line x1="{:.1f}" y1="{:.1f}" x2="{:.1f}" y2="{:.1f}" '
-                           'stroke="{}" stroke-width="1"/>'
-                           .format(p[0], p[1], q[0], q[1], c['edge']))
-    for li, col in enumerate(coords):
-        fill = c['purple'] if li == len(coords) - 1 else c['node']
-        for p in col:
-            out.append('<circle cx="{:.1f}" cy="{:.1f}" r="5.5" fill="{}" '
-                       'stroke="{}" stroke-width="1.5"/>'
-                       .format(p[0], p[1], c['panel'], fill))
-    out.append('<text x="{:.1f}" y="{:.1f}" fill="{}" font-size="11.5" '
-               'text-anchor="middle">predict, then verify</text>'
-               .format(gx + 107, gy + 172, c['dim']))
+    # ---- left graphic: ASCII portrait
+    for i, line in enumerate(ART_ROWS):
+        if not line.strip():
+            continue
+        out.append('<text x="{:.1f}" y="{:.2f}" font-size="{}" fill="{}" '
+                   'xml:space="preserve">{}</text>'
+                   .format(ART_X, ART_TOP + i * ART_LH, ART_FS, c['text'], esc(line)))
 
-    # header inside the text block
+    # ---- header inside the text block
     y = TOP
     out.append('<text x="{}" y="{}" fill="{}" font-weight="bold">sesha-2k3</text>'
                .format(TX, y, c['orange']))
@@ -187,7 +208,7 @@ def build(theme_name):
                .format(TX, y, c['border'], '-' * 42))
     y += LH * 1.35
 
-    # static rows
+    # ---- static rows
     for label, value, dyn in STATIC_ROWS:
         out.append('<text x="{}" y="{:.1f}">'.format(TX, y))
         out.append('<tspan fill="{}">{}</tspan>'.format(c['label'], esc(label)))
@@ -201,7 +222,7 @@ def build(theme_name):
         out.append('</text>')
         y += LH
 
-    # github block
+    # ---- github block
     y += LH * 0.55
     out.append('<text x="{}" y="{:.1f}" fill="{}">{}</text>'
                .format(TX, y, c['dim'], 'github ' + '-' * 35))
@@ -221,7 +242,7 @@ def build(theme_name):
         out.append('</text>')
         y += LH
 
-    # loc breakdown, indented under Lines of Code
+    # ---- loc breakdown, indented under Lines of Code
     out.append('<text x="{:.1f}" y="{:.1f}" xml:space="preserve">'
                .format(TX + 16 * CW, y))
     out.append('<tspan id="loc_add" fill="{}">262,918</tspan>'.format(c['accent']))
@@ -231,15 +252,27 @@ def build(theme_name):
     out.append('</text>')
     y += LH * 1.6
 
-    # palette strip
+    # ---- palette strip
     strip = [c['pink'], c['orange'], c['accent'], c['label'],
              c['purple'], c['dim'], c['text'], c['border']]
     for i, col in enumerate(strip):
         out.append('<rect x="{:.1f}" y="{:.1f}" width="18" height="10" rx="2" '
                    'fill="{}"/>'.format(TX + i * 22, y - 9, col))
 
+    # ---- close: size the canvas around the real content extent
+    art_bottom = ART_TOP + (len(ART_ROWS) - 1) * ART_LH
+    H = round(max(y + 6, art_bottom) + 24)
+
+    svg_open = (
+        '<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" '
+        'viewBox="0 0 {w} {h}" font-family="\'JetBrains Mono\',\'Cascadia Code\','
+        '\'Fira Code\',\'DejaVu Sans Mono\',Consolas,\'Courier New\',monospace" '
+        'font-size="13.5">'.format(w=W, h=H))
+    panel = ('<rect x="0.5" y="0.5" width="{}" height="{}" rx="10" fill="{}" '
+             'stroke="{}"/>'.format(W - 1, H - 1, c['panel'], c['border']))
+
     out.append('</svg>')
-    return ''.join(out)
+    return ''.join(out).replace('@@OPEN@@', svg_open).replace('@@PANEL@@', panel)
 
 
 if __name__ == '__main__':
