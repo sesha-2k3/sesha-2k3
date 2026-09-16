@@ -11,8 +11,10 @@ import hashlib
 # Repository permissions: read:Commit statuses, read:Contents, read:Issues, read:Metadata, read:Pull Requests
 # Issues and pull requests permissions not needed at the moment, but may be used in the future
 HEADERS = {'authorization': 'token '+ os.environ['ACCESS_TOKEN']}
-USER_NAME = os.environ['USER_NAME'] # 'Andrew6rant'
-QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0, 'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0}
+USER_NAME = os.environ['USER_NAME'] # 'sesha=2k3'
+QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0,
+               'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0,
+               'streak_getter': 0}
 
 
 def daily_readme(birthday):
@@ -173,6 +175,84 @@ def recursive_loc(owner, repo_name, data, cache_comment, addition_total=0, delet
     if request.status_code == 403:
         raise Exception('Too many requests in a short amount of time!\nYou\'ve hit the non-documented anti-abuse limit!')
     raise Exception('recursive_loc() has failed with a', request.status_code, request.text, QUERY_COUNT)
+
+
+def streak_getter(acc_date):
+    """
+    Returns (current_streak, longest_streak) as formatted day counts, derived
+    from the contribution calendar.
+ 
+    acc_date is the createdAt string already returned by user_getter().
+    """
+    query = '''
+    query($login: String!, $from: DateTime!, $to: DateTime!) {
+        user(login: $login) {
+            contributionsCollection(from: $from, to: $to) {
+                contributionCalendar {
+                    weeks {
+                        contributionDays {
+                            date
+                            contributionCount
+                        }
+                    }
+                }
+            }
+        }
+    }'''
+ 
+    start = datetime.datetime.fromisoformat(acc_date.replace('Z', '+00:00'))
+    now = datetime.datetime.now(datetime.timezone.utc)
+ 
+    days = {}
+    cursor = start
+    while cursor < now:
+        window_end = min(cursor + datetime.timedelta(days=364), now)
+        variables = {'login': USER_NAME,
+                     'from': cursor.isoformat(),
+                     'to': window_end.isoformat()}
+        request = requests.post('https://api.github.com/graphql',
+                                json={'query': query, 'variables': variables},
+                                headers=HEADERS)
+        query_count('streak_getter')
+        if request.status_code != 200:
+            raise Exception('streak_getter() has failed with a', request.status_code, request.text, QUERY_COUNT)
+        weeks = request.json()['data']['user']['contributionsCollection']['contributionCalendar']['weeks']
+        for week in weeks:
+            for day in week['contributionDays']:
+                # windows can overlap at the seams; keep the larger count
+                days[day['date']] = max(days.get(day['date'], 0), day['contributionCount'])
+        cursor = window_end + datetime.timedelta(days=1)
+ 
+    if not days:
+        return '0 days', '0 days'
+ 
+    def fmt(n):
+        return f'{n} day' if n == 1 else f'{n} days'
+ 
+    # Current streak. A zero-contribution today does not break the streak --
+    # the day is not over yet -- so start counting from yesterday in that case.
+    today = datetime.date.today()
+    day = today if days.get(today.isoformat(), 0) > 0 else today - datetime.timedelta(days=1)
+    current = 0
+    while days.get(day.isoformat(), 0) > 0:
+        current += 1
+        day -= datetime.timedelta(days=1)
+ 
+    # Longest streak: walk every calendar day, not just the keys, so that
+    # gaps in the calendar correctly break a run.
+    first = min(datetime.date.fromisoformat(k) for k in days)
+    last = max(datetime.date.fromisoformat(k) for k in days)
+    longest = run = 0
+    day = first
+    while day <= last:
+        if days.get(day.isoformat(), 0) > 0:
+            run += 1
+            longest = max(longest, run)
+        else:
+            run = 0
+        day += datetime.timedelta(days=1)
+ 
+    return fmt(current), fmt(longest)
 
 
 def loc_counter_one_repo(owner, repo_name, data, cache_comment, history, addition_total, deletion_total, my_commits):
@@ -347,9 +427,9 @@ def stars_counter(data):
     return total_stars
 
 
-def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib_data, follower_data, loc_data):
+def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib_data, follower_data, streak_data, loc_data):
     """
-    Parse SVG files and update elements with my age, commits, stars, repositories, and lines written
+    Parse SVG files and update elements with my stats
     """
     tree = etree.parse(filename)
     root = tree.getroot()
@@ -359,6 +439,8 @@ def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib
     justify_format(root, 'commit_data', commit_data, 25)
     justify_format(root, 'star_data', star_data, 27)
     justify_format(root, 'follower_data', follower_data, 23)
+    justify_format(root, 'streak_data', streak_data[0], 18)
+    justify_format(root, 'streak_best', streak_data[1], 18)
     justify_format(root, 'loc_data', loc_data[2], 19)
     justify_format(root, 'loc_add', loc_data[0])
     justify_format(root, 'loc_del', loc_data[1])
@@ -471,7 +553,7 @@ def formatter(query_type, difference, funct_return=False, whitespace=0):
 
 if __name__ == '__main__':
     """
-    Andrew Grant (Andrew6rant), 2022-2025
+    Sesha (sesha-2k3), 2022-2025
     """
     print('Calculation times:')
     # define global variable for owner ID and calculate user's creation date
@@ -499,8 +581,14 @@ if __name__ == '__main__':
 
     for index in range(len(total_loc)-1): total_loc[index] = '{:,}'.format(total_loc[index]) # format added, deleted, and total LOC
 
-    svg_overwrite('dark_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
-    svg_overwrite('light_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
+    # svg_overwrite('dark_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
+    # svg_overwrite('light_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
+    
+    streak_data, streak_time = perf_counter(streak_getter, acc_date)
+ 
+    svg_overwrite('dark_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, streak_data, total_loc[:-1])
+    svg_overwrite('light_mode.svg', age_data, commit_data, star_data, repo_data, contrib_data, follower_data, streak_data, total_loc[:-1])
+ 
 
     # move cursor to override 'Calculation times:' with 'Total function time:' and the total function time, then move cursor back
     print('\033[F\033[F\033[F\033[F\033[F\033[F\033[F\033[F',
