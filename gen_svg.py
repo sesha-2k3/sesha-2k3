@@ -47,47 +47,15 @@ THEMES = {
     },
 }
 
-# ---------------------------------------------------------------- portrait
-# Baked by photo_to_ascii.py. 52 columns wide, sparse->dense ramp " .:-=+*#%@".
-# Dense glyphs sit where the photo is DARK, so on the dark panel this reads as
-# a lit silhouette and on the light panel as an ink drawing. Same grid for both.
-ART_ROWS = [
-    '                     =++++-',
-    '                 =+#%@@@%%%#*=',
-    '               *%@@@%%%%%###%%#+-',
-    '             +%@%%%%%%###***++##+',
-    '            *%%%%%@@%%####**++=##=',
-    '           -%%%@@@@@%%#####*******',
-    '            %%@@@@@@%#########**+',
-    '           +%%%%%%%%####***###++=--',
-    '          +#%@%%##%%###########*+ =',
-    '          +*%%@@%%%%%####%###+*%+ -',
-    '          =*#%@@@%#%%%%%#####*+*',
-    '          =*#%%@@@##%%%%%%%#####',
-    '        --=*#%%@##%###%%%%%%#%#-   -',
-    '        - -+%%%%+=+*######## =#=   +',
-    '      ===+#%%%%#==---=***+=  *%%%+=+=',
-    '     -===*#%%%%%=---- ---    #%#%#++*+---==',
-    '     -=-=**%%%%%=    = -     +%%%%%*+*-==',
-    '    --==++*%%*++=    -=      +%%%%%%#*+-++-',
-    '    -====+*#*+=---    -      =#%%%%##**+=*=-',
-    '   -====++++*+--        -      =****===++=+-',
-    ' ---===++++**=-       -          =*+ -=-=-==-',
-    '==-====++++**=                   -+*------ -=-',
-    '==-====++++**+-         =        -=*+-= -    =',
-    '++=====+++***+-                  -=+*----    -- -',
-    '+*=====+++***+=                  --+*+ -      =+-',
-    '+*==+==+++***+=                  --=+*=        +=',
-    '**======++*+**=                  --=+**=        =',
-    '**======+++***+-                --=+**##+       --',
-    '**+=====+++**++=                -==**##%@*-     -+=-',
-    '+*+=====++***++==-               -==+*##%%+      +*+',
-]
-
-ART_FS = 8.2        # font size; 52 cols * 0.6em = 256px, fits the art column
-ART_LH = 9.84       # line height: 2x the character advance, matching CELL=0.5
-ART_X = 22.0
-ART_TOP = 126.0
+# ---------------------------------------------------------------- network
+# Feed-forward network with a cascading signal pulse, baked by net.py.
+# Local space is 256x310, oriented top-to-bottom to suit the tall art
+# column. Every animation shares a 2s period so the wave stays in step.
+# Colour placeholders are substituted per theme below.
+NET = '<g><g stroke="@@EDGE@@" stroke-width="1" fill="none"><line x1="49.0" y1="30.0" x2="46.0" y2="118.0"/><line x1="49.0" y1="30.0" x2="84.0" y2="118.0"/><line x1="49.0" y1="30.0" x2="122.0" y2="118.0"/><line x1="49.0" y1="30.0" x2="160.0" y2="118.0"/><line x1="49.0" y1="30.0" x2="198.0" y2="118.0"/><line x1="49.0" y1="30.0" x2="236.0" y2="118.0"/><line x1="95.0" y1="30.0" x2="46.0" y2="118.0"/><line x1="95.0" y1="30.0" x2="84.0" y2="118.0"/><line x1="95.0" y1="30.0" x2="122.0" y2="118.0"/><line x1="95.0" y1="30.0" x2="160.0" y2="118.0"/><line x1="95.0" y1="30.0" x2="198.0" y2="118.0"/><line x1="95.0" y1="30.0" x2="236.0" y2="118.0"/><line x1="141.0" y1="30.0" x2="46.0" y2="118.0"/><line x1="141.0" y1="30.0" x2="84.0" y2="118.0"/><line x1="141.0" y1="30.0" x2="122.0" y2="118.0"/><line x1="141.0" y1="30.0" x2="160.0" y2="118.0"/><line x1="141.0" y1="30.0" x2="198.0" y2="118.0"/><line x1="141.0" y1="30.0" x2="236.0" y2="118.0"/><line x1="187.0" y1="30.0" x2="46.0" y2="118.0"/><line x1="187.0" y1="30.0" x2="84.0" y2="118.0"/><line x1="187.0" y1="30.0" x2="122.0" y2="118.0"/><line x1="187.0" y1="30.0" x2="160.0" y2="118.0"/><line x1="187.0" y1="30.0" x2="198.0" y2="118.0"/><line x1="187.0" y1="30.0" x2="236.0" y2="118.0"/><line x1="233.0" y1="30.0" x2="46.0" y2="118.0"/><line x1="233.0" y1="30.0" x2="84.0" y2="118.0"/><line x1="233.0" y1="30.0" x2="122.0" y2="118.0"/><line x1="233.0" y1="30.0" x2="160.0" y2="118.0"/><line x1="233.0" y1="30.0" x2="198.0" y2="118.0"/><line x1="233.0" y1="30.0" x2="236.0" y2="118.0"/><line x1="46.0" y1="118.0" x2="66.0" y2="206.0"/><line x1="46.0" y1="118.0" x2="116.0" y2="206.0"/><line x1="46.0" y1="118.0" x2="166.0" y2="206.0"/><line x1="46.0" y1="118.0" x2="216.0" y2="206.0"/><line x1="84.0" y1="118.0" x2="66.0" y2="206.0"/><line x1="84.0" y1="118.0" x2="116.0" y2="206.0"/><line x1="84.0" y1="118.0" x2="166.0" y2="206.0"/><line x1="84.0" y1="118.0" x2="216.0" y2="206.0"/><line x1="122.0" y1="118.0" x2="66.0" y2="206.0"/><line x1="122.0" y1="118.0" x2="116.0" y2="206.0"/><line x1="122.0" y1="118.0" x2="166.0" y2="206.0"/><line x1="122.0" y1="118.0" x2="216.0" y2="206.0"/><line x1="160.0" y1="118.0" x2="66.0" y2="206.0"/><line x1="160.0" y1="118.0" x2="116.0" y2="206.0"/><line x1="160.0" y1="118.0" x2="166.0" y2="206.0"/><line x1="160.0" y1="118.0" x2="216.0" y2="206.0"/><line x1="198.0" y1="118.0" x2="66.0" y2="206.0"/><line x1="198.0" y1="118.0" x2="116.0" y2="206.0"/><line x1="198.0" y1="118.0" x2="166.0" y2="206.0"/><line x1="198.0" y1="118.0" x2="216.0" y2="206.0"/><line x1="236.0" y1="118.0" x2="66.0" y2="206.0"/><line x1="236.0" y1="118.0" x2="116.0" y2="206.0"/><line x1="236.0" y1="118.0" x2="166.0" y2="206.0"/><line x1="236.0" y1="118.0" x2="216.0" y2="206.0"/><line x1="66.0" y1="206.0" x2="111.0" y2="285.0"/><line x1="66.0" y1="206.0" x2="171.0" y2="285.0"/><line x1="116.0" y1="206.0" x2="111.0" y2="285.0"/><line x1="116.0" y1="206.0" x2="171.0" y2="285.0"/><line x1="166.0" y1="206.0" x2="111.0" y2="285.0"/><line x1="166.0" y1="206.0" x2="171.0" y2="285.0"/><line x1="216.0" y1="206.0" x2="111.0" y2="285.0"/><line x1="216.0" y1="206.0" x2="171.0" y2="285.0"/></g><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M49.0,30.0 L46.0,118.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.001;0.250;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.001;0.001;0.250;0.250;1" dur="2.0s" repeatCount="indefinite"/></circle><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M49.0,30.0 L236.0,118.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.001;0.250;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.001;0.001;0.250;0.250;1" dur="2.0s" repeatCount="indefinite"/></circle><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M95.0,30.0 L198.0,118.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.001;0.250;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.001;0.001;0.250;0.250;1" dur="2.0s" repeatCount="indefinite"/></circle><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M141.0,30.0 L160.0,118.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.001;0.250;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.001;0.001;0.250;0.250;1" dur="2.0s" repeatCount="indefinite"/></circle><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M187.0,30.0 L122.0,118.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.001;0.250;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.001;0.001;0.250;0.250;1" dur="2.0s" repeatCount="indefinite"/></circle><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M233.0,30.0 L84.0,118.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.001;0.250;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.001;0.001;0.250;0.250;1" dur="2.0s" repeatCount="indefinite"/></circle><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M46.0,118.0 L66.0,206.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.250;0.500;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.250;0.250;0.500;0.500;1" dur="2.0s" repeatCount="indefinite"/></circle><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M84.0,118.0 L66.0,206.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.250;0.500;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.250;0.250;0.500;0.500;1" dur="2.0s" repeatCount="indefinite"/></circle><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M122.0,118.0 L66.0,206.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.250;0.500;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.250;0.250;0.500;0.500;1" dur="2.0s" repeatCount="indefinite"/></circle><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M160.0,118.0 L66.0,206.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.250;0.500;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.250;0.250;0.500;0.500;1" dur="2.0s" repeatCount="indefinite"/></circle><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M198.0,118.0 L66.0,206.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.250;0.500;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.250;0.250;0.500;0.500;1" dur="2.0s" repeatCount="indefinite"/></circle><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M236.0,118.0 L66.0,206.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.250;0.500;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.250;0.250;0.500;0.500;1" dur="2.0s" repeatCount="indefinite"/></circle><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M66.0,206.0 L111.0,285.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.500;0.750;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.500;0.500;0.750;0.750;1" dur="2.0s" repeatCount="indefinite"/></circle><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M66.0,206.0 L171.0,285.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.500;0.750;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.500;0.500;0.750;0.750;1" dur="2.0s" repeatCount="indefinite"/></circle><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M116.0,206.0 L111.0,285.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.500;0.750;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.500;0.500;0.750;0.750;1" dur="2.0s" repeatCount="indefinite"/></circle><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M166.0,206.0 L111.0,285.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.500;0.750;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.500;0.500;0.750;0.750;1" dur="2.0s" repeatCount="indefinite"/></circle><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M166.0,206.0 L171.0,285.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.500;0.750;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.500;0.500;0.750;0.750;1" dur="2.0s" repeatCount="indefinite"/></circle><circle r="2.4" fill="@@ACCENT@@" opacity="0"><animateMotion path="M216.0,206.0 L111.0,285.0" dur="2.0s" keyPoints="0;0;1;1" keyTimes="0;0.500;0.750;1" calcMode="linear" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.500;0.500;0.750;0.750;1" dur="2.0s" repeatCount="indefinite"/></circle><circle cx="49.0" cy="30.0" r="6.0" fill="@@PANEL@@" stroke="@@NODE@@" stroke-width="1.5"/><circle cx="49.0" cy="30.0" r="2.6" fill="@@NODE@@" opacity="0"><animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.000;0.030;0.120;1" dur="2.0s" repeatCount="indefinite"/></circle><circle cx="95.0" cy="30.0" r="6.0" fill="@@PANEL@@" stroke="@@NODE@@" stroke-width="1.5"/><circle cx="95.0" cy="30.0" r="2.6" fill="@@NODE@@" opacity="0"><animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.000;0.030;0.120;1" dur="2.0s" repeatCount="indefinite"/></circle><circle cx="141.0" cy="30.0" r="6.0" fill="@@PANEL@@" stroke="@@NODE@@" stroke-width="1.5"/><circle cx="141.0" cy="30.0" r="2.6" fill="@@NODE@@" opacity="0"><animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.000;0.030;0.120;1" dur="2.0s" repeatCount="indefinite"/></circle><circle cx="187.0" cy="30.0" r="6.0" fill="@@PANEL@@" stroke="@@NODE@@" stroke-width="1.5"/><circle cx="187.0" cy="30.0" r="2.6" fill="@@NODE@@" opacity="0"><animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.000;0.030;0.120;1" dur="2.0s" repeatCount="indefinite"/></circle><circle cx="233.0" cy="30.0" r="6.0" fill="@@PANEL@@" stroke="@@NODE@@" stroke-width="1.5"/><circle cx="233.0" cy="30.0" r="2.6" fill="@@NODE@@" opacity="0"><animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.000;0.030;0.120;1" dur="2.0s" repeatCount="indefinite"/></circle><circle cx="46.0" cy="118.0" r="6.0" fill="@@PANEL@@" stroke="@@NODE@@" stroke-width="1.5"/><circle cx="46.0" cy="118.0" r="2.6" fill="@@NODE@@" opacity="0"><animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.250;0.280;0.370;1" dur="2.0s" repeatCount="indefinite"/></circle><circle cx="84.0" cy="118.0" r="6.0" fill="@@PANEL@@" stroke="@@NODE@@" stroke-width="1.5"/><circle cx="84.0" cy="118.0" r="2.6" fill="@@NODE@@" opacity="0"><animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.250;0.280;0.370;1" dur="2.0s" repeatCount="indefinite"/></circle><circle cx="122.0" cy="118.0" r="6.0" fill="@@PANEL@@" stroke="@@NODE@@" stroke-width="1.5"/><circle cx="122.0" cy="118.0" r="2.6" fill="@@NODE@@" opacity="0"><animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.250;0.280;0.370;1" dur="2.0s" repeatCount="indefinite"/></circle><circle cx="160.0" cy="118.0" r="6.0" fill="@@PANEL@@" stroke="@@NODE@@" stroke-width="1.5"/><circle cx="160.0" cy="118.0" r="2.6" fill="@@NODE@@" opacity="0"><animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.250;0.280;0.370;1" dur="2.0s" repeatCount="indefinite"/></circle><circle cx="198.0" cy="118.0" r="6.0" fill="@@PANEL@@" stroke="@@NODE@@" stroke-width="1.5"/><circle cx="198.0" cy="118.0" r="2.6" fill="@@NODE@@" opacity="0"><animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.250;0.280;0.370;1" dur="2.0s" repeatCount="indefinite"/></circle><circle cx="236.0" cy="118.0" r="6.0" fill="@@PANEL@@" stroke="@@NODE@@" stroke-width="1.5"/><circle cx="236.0" cy="118.0" r="2.6" fill="@@NODE@@" opacity="0"><animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.250;0.280;0.370;1" dur="2.0s" repeatCount="indefinite"/></circle><circle cx="66.0" cy="206.0" r="6.0" fill="@@PANEL@@" stroke="@@NODE@@" stroke-width="1.5"/><circle cx="66.0" cy="206.0" r="2.6" fill="@@NODE@@" opacity="0"><animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.500;0.530;0.620;1" dur="2.0s" repeatCount="indefinite"/></circle><circle cx="116.0" cy="206.0" r="6.0" fill="@@PANEL@@" stroke="@@NODE@@" stroke-width="1.5"/><circle cx="116.0" cy="206.0" r="2.6" fill="@@NODE@@" opacity="0"><animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.500;0.530;0.620;1" dur="2.0s" repeatCount="indefinite"/></circle><circle cx="166.0" cy="206.0" r="6.0" fill="@@PANEL@@" stroke="@@NODE@@" stroke-width="1.5"/><circle cx="166.0" cy="206.0" r="2.6" fill="@@NODE@@" opacity="0"><animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.500;0.530;0.620;1" dur="2.0s" repeatCount="indefinite"/></circle><circle cx="216.0" cy="206.0" r="6.0" fill="@@PANEL@@" stroke="@@NODE@@" stroke-width="1.5"/><circle cx="216.0" cy="206.0" r="2.6" fill="@@NODE@@" opacity="0"><animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.500;0.530;0.620;1" dur="2.0s" repeatCount="indefinite"/></circle><circle cx="111.0" cy="285.0" r="7.0" fill="@@PANEL@@" stroke="@@OUT@@" stroke-width="1.5"/><circle cx="111.0" cy="285.0" r="2.6" fill="@@OUT@@" opacity="0"><animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.750;0.780;0.870;1" dur="2.0s" repeatCount="indefinite"/></circle><circle cx="171.0" cy="285.0" r="7.0" fill="@@PANEL@@" stroke="@@OUT@@" stroke-width="1.5"/><circle cx="171.0" cy="285.0" r="2.6" fill="@@OUT@@" opacity="0"><animate attributeName="opacity" values="0;0;0.95;0;0" keyTimes="0;0.750;0.780;0.870;1" dur="2.0s" repeatCount="indefinite"/></circle><text x="6" y="32.8" font-size="8" fill="@@DIM@@">input</text><text x="6" y="120.8" font-size="8" fill="@@DIM@@">hidden</text><text x="6" y="208.8" font-size="8" fill="@@DIM@@">hidden</text><text x="6" y="287.8" font-size="8" fill="@@DIM@@">output</text></g>'
+NET_H = 310
+ART_X = 25.0
+ART_TOP = 174.0
 
 # ---------------------------------------------------------------- content
 PROMPT = 'sesha-2k3@github:~$ ./neofetch --profile'
@@ -114,7 +82,9 @@ STAT_ROWS = [
     ('Commits',       'commit_data',   '1,284',   None),
     ('Stars',         'star_data',     '37',      None),
     ('Followers',     'follower_data', '19',      None),
-    ('Lines of Code', 'loc_data',      '128,430', None),
+    ('Current Streak', 'streak_data',   '12 days', None),
+    ('Longest Streak', 'streak_best',   '34 days', None),
+    ('Lines of Code',  'loc_data',      '128,430', None),
 ]
 
 
@@ -187,13 +157,14 @@ def build(theme_name):
                'begin="2.4s" repeatCount="indefinite"/>')
     out.append('</rect>')
 
-    # ---- left graphic: ASCII portrait
-    for i, line in enumerate(ART_ROWS):
-        if not line.strip():
-            continue
-        out.append('<text x="{:.1f}" y="{:.2f}" font-size="{}" fill="{}" '
-                   'xml:space="preserve">{}</text>'
-                   .format(ART_X, ART_TOP + i * ART_LH, ART_FS, c['text'], esc(line)))
+    # ---- left graphic: feed-forward network
+    net = NET
+    for token, key in (('@@EDGE@@', 'edge'), ('@@NODE@@', 'node'),
+                       ('@@OUT@@', 'purple'), ('@@ACCENT@@', 'accent'),
+                       ('@@PANEL@@', 'panel'), ('@@DIM@@', 'dim')):
+        net = net.replace(token, c[key])
+    out.append('<g transform="translate({:.1f},{:.1f})">{}</g>'
+               .format(ART_X, ART_TOP, net))
 
     # ---- header inside the text block
     y = TOP
@@ -260,7 +231,7 @@ def build(theme_name):
                    'fill="{}"/>'.format(TX + i * 22, y - 9, col))
 
     # ---- close: size the canvas around the real content extent
-    art_bottom = ART_TOP + (len(ART_ROWS) - 1) * ART_LH
+    art_bottom = ART_TOP + NET_H
     H = round(max(y + 6, art_bottom) + 24)
 
     svg_open = (
