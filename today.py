@@ -143,13 +143,33 @@ def recursive_loc(owner, repo_name, data, cache_comment, addition_total=0, delet
             }
         }
     }'''
+    # In today.py, inside recursive_loc(), leave the docstring, query_count() call,
+    # and the whole query = ''' ... ''' block exactly as they are.
+    #
+    # Replace everything from the `variables = {...}` line down to the end of the
+    # function with the block below. `time` is already imported at the top of the
+    # file, so no new imports are needed.
+
     variables = {'repo_name': repo_name, 'owner': owner, 'cursor': cursor}
-    request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables':variables}, headers=HEADERS) # I cannot use simple_request(), because I want to save the file before raising Exception
-    if request.status_code == 200:
-        if request.json()['data']['repository']['defaultBranchRef'] != None: # Only count commits if repo isn't empty
-            return loc_counter_one_repo(owner, repo_name, data, cache_comment, request.json()['data']['repository']['defaultBranchRef']['target']['history'], addition_total, deletion_total, my_commits)
-        else: return 0
-    force_close_file(data, cache_comment) # saves what is currently in the file before this program crashes
+
+    # GitHub returns 502/503/504 on repositories with long histories, because
+    # asking for additions and deletions on 100 commits at a time is expensive
+    # server-side. These are transient, so back off and try again rather than
+    # throwing away the whole run.
+    for attempt in range(5):
+        request = requests.post('https://api.github.com/graphql', json={'query': query, 'variables': variables}, headers=HEADERS)
+        if request.status_code == 200:
+            if request.json()['data']['repository']['defaultBranchRef'] is not None:
+                return loc_counter_one_repo(owner, repo_name, data, cache_comment, request.json()['data']['repository']['defaultBranchRef']['target']['history'], addition_total, deletion_total, my_commits)
+            return 0  # repository is empty
+        if request.status_code in (502, 503, 504):
+            wait = 2 ** attempt  # 1, 2, 4, 8, 16 seconds
+            print(f'  {owner}/{repo_name}: {request.status_code}, retrying in {wait}s')
+            time.sleep(wait)
+            continue
+        break  # anything else is not worth retrying
+
+    force_close_file(data, cache_comment)  # save progress before crashing
     if request.status_code == 403:
         raise Exception('Too many requests in a short amount of time!\nYou\'ve hit the non-documented anti-abuse limit!')
     raise Exception('recursive_loc() has failed with a', request.status_code, request.text, QUERY_COUNT)
