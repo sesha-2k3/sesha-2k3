@@ -62,18 +62,21 @@ PROMPT = 'sesha-2k3@github:~$ ./neofetch --profile'
 
 # (label, value, dynamic_id or None)
 STATIC_ROWS = [
-    ('OS',        'Windows 11',                          None),
-    ('Editor',    'VS Code, Jupyter, Colab',             None),
-    ('Shell',     'Windows Terminal',                    None),
-    ('Uptime',    '0 years, 0 months, 0 days',           'age_data'),
-    ('Focus',     'LLM\'s, Machine Learning, SDE',  None),
-    ('Languages', 'Python, Java, C',                      None),
-    ('ML',        'NumPy, Pandas, scikit-learn',         None),
-    ('Frontend',  'HTML, CSS, Bootstrap',                None),
-    ('Backend',   'FastAPI, Streamlit',                  None),
-    ('Databases', 'MySQL, PostgreSQL, MongoDB',          None),
-    ('Email',     'seshadrivv28@gmail.com',              None),
-    ('LinkedIn',  'in/seshadrivv28',                     None),
+    ('OS',        'macOS, Linux',                                None),
+    ('Editor',    'VS Code, Jupyter, Colab',                     None),
+    ('Shell',     'zsh, Git, Docker',                            None),
+    ('Uptime',    '0 years, 0 months, 0 days',                   'age_data'),
+    ('Study',     'MS Computer Science, Northeastern',           None),
+    ('Focus',     'Machine Learning, NLP, LLM Systems',          None),
+    ('Languages', 'Python, SQL, C++, Java, JavaScript, R',       None),
+    ('ML',        'PyTorch, TensorFlow, scikit-learn, XGBoost',  None),
+    ('LLM',       'LangChain, LangGraph, LlamaIndex, LangFuse',  None),
+    ('Data',      'NumPy, Pandas, Snowflake',                    None),
+    ('Web',       'FastAPI, Streamlit, React, Next.js',          None),
+    ('Databases', 'PostgreSQL, pgvector, Redis, MongoDB',        None),
+    ('Infra',     'Docker, AWS, Terraform, Linux',               None),
+    ('Email',     'seshadrivv28@gmail.com',                      None),
+    ('LinkedIn',  'in/seshadrivv28',                             None),
 ]
 
 # (label, element_id, placeholder, suffix_parts)
